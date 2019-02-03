@@ -74,5 +74,8 @@
     <ClInclude Include="pollthread.hpp">
       <Filter>Source Files\core</Filter>
     </ClInclude>
+    <ClInclude Include="stream.hpp">
+      <Filter>Source Files\net</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

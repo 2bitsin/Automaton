@@ -19,10 +19,10 @@ namespace automaton
 			_polfuture {}
 		{
 			if (autostart)
-				exec ();
+				start ();
 		}	
 
-		void exec()
+		void start()
 		{
 			_polfuture = std::async([this]()
 			{

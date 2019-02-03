@@ -153,6 +153,7 @@
     <ClInclude Include="pollthread.hpp" />
     <ClInclude Include="sheduler.hpp" />
     <ClInclude Include="dgram.hpp" />
+    <ClInclude Include="stream.hpp" />
     <ClInclude Include="tempprobe.hpp" />
     <ClInclude Include="utils.hpp" />
   </ItemGroup>

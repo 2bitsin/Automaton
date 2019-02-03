@@ -24,7 +24,7 @@ int main ()
 		std::printf ("%08llX %lf\n", id, temp * q);
 	});
 
-	probe.exec ();
+	probe.start ();
 
 	while(sched.next () || sched.wait ())
 	{}
