@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\net">
+      <UniqueIdentifier>{d9d733e5-878f-4efc-9513-a5fba3281b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{012bd60d-f78c-4b87-ab6e-c548dbe4f1b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{604254fc-07eb-455f-b967-4506c4770d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\netprobe">
+      <UniqueIdentifier>{a5925b82-2c8c-454d-bfbc-555c65c091f9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="address.cpp">
+      <Filter>Source Files\net</Filter>
+    </ClCompile>
+    <ClCompile Include="dgram.cpp">
+      <Filter>Source Files\net</Filter>
+    </ClCompile>
+    <ClCompile Include="netlayer.cpp">
+      <Filter>Source Files\net</Filter>
+    </ClCompile>
+    <ClCompile Include="clock.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Fake_WiringPi.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="address.hpp">
+      <Filter>Source Files\net</Filter>
+    </ClInclude>
+    <ClInclude Include="dgram.hpp">
+      <Filter>Source Files\net</Filter>
+    </ClInclude>
+    <ClInclude Include="clock.hpp">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="sheduler.hpp">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.hpp">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Fake_WiringPi.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="tempprobe.hpp">
+      <Filter>Source Files\netprobe</Filter>
+    </ClInclude>
+    <ClInclude Include="pollthread.hpp">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
