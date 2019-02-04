@@ -48,6 +48,9 @@
     <ClCompile Include="Fake_WiringPi.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="stream.cpp">
+      <Filter>Source Files\net</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="address.hpp">
@@ -75,6 +78,9 @@
       <Filter>Source Files\core</Filter>
     </ClInclude>
     <ClInclude Include="stream.hpp">
+      <Filter>Source Files\net</Filter>
+    </ClInclude>
+    <ClInclude Include="socket_base.hpp">
       <Filter>Source Files\net</Filter>
     </ClInclude>
   </ItemGroup>

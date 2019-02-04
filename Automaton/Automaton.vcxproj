@@ -143,6 +143,7 @@
     <ClCompile Include="dgram.cpp" />
     <ClCompile Include="Fake_WiringPi.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stream.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="netlayer.cpp" />
   </ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="pollthread.hpp" />
     <ClInclude Include="sheduler.hpp" />
     <ClInclude Include="dgram.hpp" />
+    <ClInclude Include="socket_base.hpp" />
     <ClInclude Include="stream.hpp" />
     <ClInclude Include="tempprobe.hpp" />
     <ClInclude Include="utils.hpp" />
