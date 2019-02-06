@@ -47,7 +47,7 @@ int main ()
 			{
 				std::string line{};
 				std::vector<std::string> lines;
-				while (std::getline (client, line))
+				while (std::getline (client, line) && line != "\r\n");
 					lines.emplace_back (line);
 				client << 
 					"HTTP/1.0 200 OK\r\n"
