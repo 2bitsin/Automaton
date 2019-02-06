@@ -151,6 +151,7 @@
     <ClInclude Include="address.hpp" />
     <ClInclude Include="clock.hpp" />
     <ClInclude Include="Fake_WiringPi.h" />
+    <ClInclude Include="sockstream.hpp" />
     <ClInclude Include="pollthread.hpp" />
     <ClInclude Include="sheduler.hpp" />
     <ClInclude Include="dgram.hpp" />
