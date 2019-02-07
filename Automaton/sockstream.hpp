@@ -27,12 +27,7 @@ namespace automaton
 			{}
 
 			int_type underflow () override
-			{
-				auto gptr = streambuf::gptr ();
-				auto egptr = streambuf::egptr ();
-				if (gptr < egptr)
-					return *streambuf::gptr ();
-
+			{				
 				auto len = _socket.recv (&_chbuff[0], sizeof (_chbuff));
 				std::printf ("Received %zu bytes.\n", len);
 				if (len > 0)
