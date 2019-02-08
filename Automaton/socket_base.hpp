@@ -24,7 +24,9 @@ static inline ::sockaddr_in full_address_to_saddr (const automaton::full_address
 static inline full_address saddr_to_full_address (const sockaddr_in& sinaddr)
 {
 	assert (sinaddr.sin_family == AF_INET);
-	return full_address (ntohs (sinaddr.sin_port), { ntohl (sinaddr.sin_addr.s_addr) });
+	auto ip = sinaddr.sin_addr.s_addr;
+	ip = ntohl (ip);
+	return full_address (ntohs (sinaddr.sin_port), { ip });
 }
 
 socket::socket (void* val)

@@ -39,29 +39,32 @@ int main ()
 	for (;;)
 	{
 		full_address addr;
-		
-		std::printf ("Client accepted : %s\n", addr.addr ().to_string ().c_str ());
+		auto client = serv.accept (addr);
+		std::printf ("Client accepted : %s\n", addr.to_string ().c_str ());
 		clients.emplace_back ([] (sockstream client) mutable
 		{
 			try
 			{
 				std::string line{};
 				std::vector<std::string> lines;
-				while (std::getline (client, line) && line != "\r\n");
+				while (std::getline (client, line) && line != "\r")
 					lines.emplace_back (line);
-				client << 
-					"HTTP/1.0 200 OK\r\n"
-					"Connection: close\r\n"
-					"Content-Type: text/html\r\n"
-					"Content-Length: 41\r\n"
-					"\r\n"
-					"<html><body><h1>HELLO!</h1></body></html>";
+				assert (lines.size () > 1);
+				line = "<html><body><h1>" + utils::date_and_time() + "</h1></body></html>";
+				client 
+					<< "HTTP/1.0 200 OK\r\n"
+					<< "Connection: close\r\n"
+					<< "Content-Type: text/html\r\n"
+					<< "Content-Length: " << line.size () << "\r\n"
+					<< "Refresh: 1; url=/\r\n"
+					<< "\r\n"				
+					<< line;
 			}
 			catch (const std::exception& ex)
 			{
 				std::printf ("ERROR: %s\n", ex.what ());
 			}
-		}, serv.accept (addr));
+		}, std::move (client));
 	}
 
 	return 0;

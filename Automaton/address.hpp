@@ -33,6 +33,11 @@ namespace automaton
 		address addr () const;
 		std::uint16_t port (bool nbo = false) const;
 	
+		std::string to_string () const
+		{
+			using namespace std::string_literals;
+			return addr ().to_string () + ":"s + std::to_string (port ());
+		}
 	protected:
 		address _addr;
 		std::uint16_t _port;

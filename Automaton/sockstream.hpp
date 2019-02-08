@@ -2,6 +2,8 @@
 
 #include "stream.hpp"
 #include <iostream>
+#include <streambuf>
+#include <fstream>
 
 namespace automaton
 {
@@ -20,30 +22,52 @@ namespace automaton
 		:	public streambuf
 		{
 			stream::socket& _socket;
-			char _chbuff[2048u];
+
+			static constexpr inline auto buffer_size = 1024u;
+
+			char_type _ibuff[buffer_size];
+			char_type _obuff[buffer_size];
 
 			internal_rdbuf(stream::socket& s)
 			:	_socket(s)
-			{}
+			{
+				streambuf::setg (_ibuff, _ibuff + buffer_size, _ibuff + buffer_size);
+				streambuf::setp (_obuff, _obuff, _obuff + buffer_size);
+			}
 
 			int_type underflow () override
 			{				
-				auto len = _socket.recv (&_chbuff[0], sizeof (_chbuff));
-				std::printf ("Received %zu bytes.\n", len);
+				auto len = _socket.recv (_ibuff, sizeof(_ibuff));
 				if (len > 0)
 				{
-					streambuf::setg (&_chbuff[0], &_chbuff[0], &_chbuff[len]);
-					return _chbuff[0];
+					streambuf::setg (_ibuff, _ibuff, _ibuff + buffer_size);
+					return *_ibuff;
 				}
 				return char_traits::eof ();
 			}
 
 			int_type overflow(int_type c) override
 			{
-				char_type cc = char_traits::to_char_type (c);
-				if (_socket.send(&cc, sizeof(cc)))
-					return cc;
-				return char_traits::eof();
+				auto leng = (streambuf::pptr () - streambuf::pbase ()) / sizeof(char_type);
+				auto sent = _socket.send (streambuf::pbase (), leng);				
+				if (sent >= leng)
+				{
+					*_obuff = char_traits::to_char_type (c);
+					streambuf::setp (_obuff, _obuff + 1u, _obuff + buffer_size);
+					return c;
+				}
+				return char_traits::eof ();
+			}
+
+			int_type sync () override
+			{
+				overflow (char_traits::eof());
+				return 0;
+			}
+
+			~internal_rdbuf () override
+			{
+				streambuf::pubsync ();
 			}
 		};
 
