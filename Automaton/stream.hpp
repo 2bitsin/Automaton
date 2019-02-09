@@ -6,28 +6,28 @@ namespace automaton
 {
 	namespace stream
 	{
-		struct socket
+		struct Socket
 		{
-			~socket ();
-			socket ();
-			socket (const socket&) = delete;
-			socket& operator = (const socket&) = delete;
-			socket (socket&&);
-			socket& operator = (socket&&);
+			~Socket ();
+			Socket ();
+			Socket (const Socket&) = delete;
+			Socket& operator = (const Socket&) = delete;
+			Socket (Socket&&);
+			Socket& operator = (Socket&&);
 
-			socket (const full_address& local);
+			Socket (const full_address& local);
 			void bind (const full_address& local) const;
 			void listen (int backlog) const;
 			std::size_t recv (		void* buff, std::size_t size, std::uint32_t flags = 0) const;
 			std::size_t send (const void* buff, std::size_t size, std::uint32_t flags = 0) const;
 			void close ();
-			socket accept (full_address&) const;
+			Socket accept (full_address&) const;
 
 			static constexpr auto peek_flag = 0x2;
 			static constexpr auto waitall_flag = 0x8;
 
 		protected:
-			socket (void*);
+			Socket (void*);
 		private:
 
 			void* _value{ nullptr };

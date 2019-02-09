@@ -29,42 +29,42 @@ static inline full_address saddr_to_full_address (const sockaddr_in& sinaddr)
 	return full_address (ntohs (sinaddr.sin_port), { ip });
 }
 
-socket::socket (void* val)
+Socket::Socket (void* val)
 :	_value(val)
 {}
 
 
-socket::~socket ()
+Socket::~Socket ()
 {
 	if (_value)
 		close ();
 }
 
-void socket::close ()
+void Socket::close ()
 {
 	::close ((socket_type)_value);
 	_value = nullptr;
 }
 
-socket::socket (socket&& prev)
-:	socket (std::exchange(prev._value, nullptr))
+Socket::Socket (Socket&& prev)
+:	Socket (std::exchange(prev._value, nullptr))
 {}
 
-auto socket::operator = (socket&& prev) -> socket&
+auto Socket::operator = (Socket&& prev) -> Socket&
 {
-	this->~socket ();
-	new (this) socket (std::move (prev));
+	this->~Socket ();
+	new (this) Socket (std::move (prev));
 	return *this;
 }
 
-socket::socket (const full_address& local)
-:	socket()
+Socket::Socket (const full_address& local)
+:	Socket()
 {
 	bind (local);
 }
 
 
-void socket::bind (const full_address& local) const
+void Socket::bind (const full_address& local) const
 {
 	auto sinaddr = full_address_to_saddr (local);
 	if (::bind ((socket_type)_value, (sockaddr*)&sinaddr, sizeof (sinaddr)) < 0)

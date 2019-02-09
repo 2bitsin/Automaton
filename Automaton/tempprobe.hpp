@@ -70,7 +70,7 @@ namespace automaton
 			std::int32_t value;
 		};
 	#pragma pack(pop)
-		dgram::socket _listener;
+		dgram::Socket _listener;
 		callback_type _callback;
 	};
 }

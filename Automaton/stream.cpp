@@ -8,20 +8,20 @@ using namespace automaton::stream;
 #include "socket_base.hpp"
 
 
-socket::socket ()
-:	socket((void*)::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP))
+Socket::Socket ()
+:	Socket((void*)::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP))
 {
 	if (_value <= 0)
 		throw std::runtime_error (__FUNCTION__ "::socket");
 }
 
-void socket::listen (int backlog) const 
+void Socket::listen (int backlog) const 
 {
 	if (::listen ((socket_type)_value, backlog))
 		throw std::runtime_error (__FUNCTION__ "::listen");
 }
 
-std::size_t socket::recv (void* buff, std::size_t size, std::uint32_t flags) const
+std::size_t Socket::recv (void* buff, std::size_t size, std::uint32_t flags) const
 {	
 	assert (size == (int)size);
 	auto length = ::recv ((socket_type)_value, (char*)buff, (int)size, (int)flags);
@@ -30,7 +30,7 @@ std::size_t socket::recv (void* buff, std::size_t size, std::uint32_t flags) con
 	return length;
 }
 
-std::size_t socket::send (const void* buff, std::size_t size, std::uint32_t flags) const
+std::size_t Socket::send (const void* buff, std::size_t size, std::uint32_t flags) const
 {
 	assert (size == (int)size);
 	auto length = ::send ((socket_type)_value, (const char*)buff, (int)size, (int)flags);
@@ -40,7 +40,7 @@ std::size_t socket::send (const void* buff, std::size_t size, std::uint32_t flag
 }
 
 
-auto socket::accept (full_address& addr) const -> socket
+auto Socket::accept (full_address& addr) const -> Socket
 {
 	sockaddr_in saddrin;
 	int size = sizeof (saddrin);

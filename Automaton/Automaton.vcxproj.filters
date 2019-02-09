@@ -86,5 +86,8 @@
     <ClInclude Include="sockstream.hpp">
       <Filter>Source Files\net</Filter>
     </ClInclude>
+    <ClInclude Include="httpendpoint.hpp">
+      <Filter>Source Files\net</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

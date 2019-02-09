@@ -7,14 +7,14 @@ using namespace dgram;
 
 #include "socket_base.hpp"
 
-socket::socket ()
+Socket::Socket ()
 :	_value ((void*)::socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP))
 {
 	if (_value <= 0)
 		throw std::runtime_error (__FUNCTION__ "::socket");
 }
 
-std::size_t socket::recv (full_address& addr, void* buff, std::size_t size, std::uint32_t flags) const
+std::size_t Socket::recv (full_address& addr, void* buff, std::size_t size, std::uint32_t flags) const
 {
 	assert (size == (int)size);
 	sockaddr_in saddrin;
@@ -27,7 +27,7 @@ std::size_t socket::recv (full_address& addr, void* buff, std::size_t size, std:
 	return length;
 }
 
-std::size_t socket::send (const full_address& addr, const void* buff, std::size_t size, std::uint32_t flags) const
+std::size_t Socket::send (const full_address& addr, const void* buff, std::size_t size, std::uint32_t flags) const
 {
 	assert (size == (int)size);
 	auto saddrin = full_address_to_saddr (addr);
