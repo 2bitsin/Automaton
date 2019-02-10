@@ -142,6 +142,7 @@
     <ClCompile Include="clock.cpp" />
     <ClCompile Include="dgram.cpp" />
     <ClCompile Include="Fake_WiringPi.cpp" />
+    <ClCompile Include="httpendpoint.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stream.cpp" />
     <ClCompile Include="utils.cpp" />

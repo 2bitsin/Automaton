@@ -76,11 +76,17 @@ namespace automaton
 		socket_type _socket;
 		internal_rdbuf _rdbuff;
 	public:
-		basic_sockstream (stream::Socket s)
+		template <typename _SocketType>
+		basic_sockstream (_SocketType&& s)
 		:	std::basic_iostream<_Char_type, _Char_traits>{ &_rdbuff },
-			_socket{ std::move (s) },
+			_socket{ std::forward<_SocketType> (s) },
 			_rdbuff{ _socket }
 		{}
+
+		basic_sockstream (const basic_sockstream&) = default;
+		basic_sockstream (basic_sockstream&&) = default;
+		basic_sockstream& operator = (const basic_sockstream&) = default;
+		basic_sockstream& operator = (basic_sockstream&&) = default;
 
 	};
 

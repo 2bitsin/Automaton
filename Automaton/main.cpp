@@ -28,6 +28,7 @@ int main ()
 
 	HttpEndpoint endpoint{ listener, scheduler };
 
+	endpoint.process (false);
 
 	return 0;
 }

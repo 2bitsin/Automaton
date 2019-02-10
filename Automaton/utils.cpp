@@ -16,3 +16,19 @@ std::string utils::date_and_time ()
 
 	return std::string (date);
 }
+
+auto utils::split_string (std::string what, std::string how)
+	-> std::vector<std::string>
+{
+	std::size_t index = 0, last = 0;
+	std::vector<std::string> output;
+
+	while((index = what.find(how, last)) != what.npos)
+	{ 
+		output.emplace_back (what.substr (last, index - last));
+		last = index + how.length ();
+	}
+	if (last < what.length ())
+		output.emplace_back (what.substr(last));
+	return output;
+}

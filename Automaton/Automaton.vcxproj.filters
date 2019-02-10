@@ -51,6 +51,9 @@
     <ClCompile Include="stream.cpp">
       <Filter>Source Files\net</Filter>
     </ClCompile>
+    <ClCompile Include="httpendpoint.cpp">
+      <Filter>Source Files\net</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="address.hpp">
