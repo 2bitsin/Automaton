@@ -21,7 +21,7 @@ const std::unordered_map<int, std::string> HttpEndpointBase::_static_responses =
 	{401, "HTTP/1.0 401 Unauthorized\r\n\r\n"},
 	{402, "HTTP/1.0 402 Payment Required\r\n\r\n"},
 	{403, "HTTP/1.0 403 Forbidden\r\n\r\n"},
-	{404, "HTTP/1.0 404 Not Found\r\n\r\n"},
+	{404, "HTTP/1.0 404 Not Found\r\nContent-Type: text/html\r\nContent-Length: 49\r\n\r\n<html><body><h1>404 Not Found.</h1></body></html>"},
 	{405, "HTTP/1.0 405 Method Not Allowed\r\n\r\n"},	
 
 	{500, "HTTP/1.0 500 Internal Server Error\r\n\r\n"},

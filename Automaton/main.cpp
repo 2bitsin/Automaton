@@ -21,14 +21,42 @@ int main ()
 	using namespace std::chrono_literals;
 
 	Clock clk;
-	Scheduler scheduler{ clk };
+	Scheduler scheduler {clk};
 
-	stream::Socket listener{ { 1000, { 0, 0, 0, 0 } } };
+	stream::Socket listener {{ 1000, { 0, 0, 0, 0 } }};
 	listener.listen (10);
+	HttpEndpoint api {listener, scheduler};
 
-	HttpEndpoint endpoint{ listener, scheduler };
+	api.attach ("/hello", 
+	[] (auto& req) 
+	{
+		req.client_stream 
+			<< "HTTP/1.0 200 OK\r\n"
+			<< "Content-Length: 47\r\n"
+			<< "\r\n"
+			<< "<html><body><h1>Hello World!</h1></body></html>"
+		;
+	});
+	api.attach ("/world", 
+	[] (auto& req) 
+	{
+		req.client_stream 
+			<< "HTTP/1.0 200 OK\r\n"
+			<< "Content-Length: 47\r\n"
+			<< "\r\n"
+			<< "<html><body><h1>World! Hello</h1></body></html>"
+		;		
+	});
 
-	endpoint.process (false);
+	std::atomic_bool shouldQuit {false};
+	auto _wait = std::thread ([&] ()
+	{
+		api.process (shouldQuit);
+	});
 
+	while (scheduler.next () || scheduler.wait ());
+
+	shouldQuit = true;
+	_wait.join();
 	return 0;
 }

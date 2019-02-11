@@ -51,6 +51,8 @@ namespace automaton
 			int_type overflow(int_type c) override
 			{
 				auto leng = (streambuf::pptr () - streambuf::pbase ()) / sizeof(char_type);
+				if (leng < 1)
+					return char_traits::eof();
 				auto sent = _socket.send (streambuf::pbase (), leng);				
 				if (sent >= leng)
 				{
