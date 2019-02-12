@@ -15,21 +15,20 @@ namespace automaton
 {
 	namespace detail
 	{
-		struct HttpEndpointBase
+		struct HttpBase
 		{
-			static const std::unordered_map<int, std::string> _static_responses;
-			static std::string get_static_response (int code);
+			static const std::unordered_map<int, std::string> _canned;
+			static std::string get_canned_response (int code);
 		};
 	}
 
 
 	template
-		<	typename _Scheduler,
-		typename _Socket,
-		typename _Mixin = void
+	<	typename _Scheduler,
+		typename _Socket
 		>
-		struct HttpEndpoint:
-		detail::HttpEndpointBase
+	struct HttpService:
+		detail::HttpBase
 	{
 
 		using scheduler_type = _Scheduler;
@@ -72,7 +71,7 @@ namespace automaton
 			{}
 		};
 
-		HttpEndpoint (socket_type& sock, scheduler_type& sched)
+		HttpService (socket_type& sock, scheduler_type& sched)
 		:	_sockstream (sock),
 			_scheduler (sched)
 		{}
@@ -100,7 +99,7 @@ namespace automaton
 				{
 					[this] (auto client, auto address)
 					{
-						return _upcast ().initiate_request (std::move (client), std::move (address));
+						return initiate_request (std::move (client), std::move (address));
 					},
 					std::move (client),
 					std::move (address)
@@ -119,7 +118,7 @@ namespace automaton
 				sockstream_type clio (client);
 
 				if (!std::getline (clio, line))
-					return _upcast ().respond_with_error (clio, 400);
+					return respond_with_error (clio, 400);
 
 				line = utils::trim (line);
 
@@ -174,31 +173,16 @@ namespace automaton
 				}
 				catch (...)
 				{
-					req.client_stream << get_static_response (404);
+					req.client_stream << get_canned_response (404);
 				}
 			});
 		}
 
 		auto respond_with_error (sockstream_type& clio, int code, const full_address& address = full_address {})
 		{
-			clio << get_static_response (code);
+			clio << get_canned_response (code);
 		}
 
-	private:
-		auto&& _upcast ()
-		{
-			if constexpr (std::is_base_of_v<HttpEndpoint, _Mixin>)
-				return (_Mixin&)*this;
-			else
-				return *this;
-		}
-		auto&& _upcast () const
-		{
-			if constexpr (std::is_base_of_v<HttpEndpoint, _Mixin>)
-				return (const _Mixin&)*this;
-			else
-				return *this;
-		}
 
 	private:
 		socket_type& _sockstream;

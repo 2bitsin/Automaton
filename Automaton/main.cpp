@@ -5,7 +5,7 @@
 #include "tempprobe.hpp"
 #include "stream.hpp"
 #include "sockstream.hpp"
-#include "httpendpoint.hpp"
+#include "httpservice.hpp"
 
 #include <chrono>
 #include <thread>
@@ -20,12 +20,12 @@ int main ()
 	using namespace std::chrono;
 	using namespace std::chrono_literals;
 
-	Clock clk;
-	Scheduler scheduler {clk};
+	Clock clock;
+	Scheduler scheduler {clock};
 
 	stream::Socket listener {{ 1000, { 0, 0, 0, 0 } }};
 	listener.listen (10);
-	HttpEndpoint api {listener, scheduler};
+	HttpService api {listener, scheduler};
 
 	api.attach ("/hello", 
 	[] (auto& req) 

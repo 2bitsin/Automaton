@@ -51,7 +51,7 @@
     <ClCompile Include="stream.cpp">
       <Filter>Source Files\net</Filter>
     </ClCompile>
-    <ClCompile Include="httpendpoint.cpp">
+    <ClCompile Include="httpservice.cpp">
       <Filter>Source Files\net</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,7 +89,7 @@
     <ClInclude Include="sockstream.hpp">
       <Filter>Source Files\net</Filter>
     </ClInclude>
-    <ClInclude Include="httpendpoint.hpp">
+    <ClInclude Include="httpservice.hpp">
       <Filter>Source Files\net</Filter>
     </ClInclude>
   </ItemGroup>

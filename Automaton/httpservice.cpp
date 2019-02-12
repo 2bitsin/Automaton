@@ -1,21 +1,21 @@
-#include "httpendpoint.hpp"
+#include "httpservice.hpp"
 
 using namespace automaton;
 using namespace detail;
 
-std::string HttpEndpointBase::get_static_response (int code)
+std::string HttpBase::get_canned_response (int code)
 {
 	try
 	{
-		return _static_responses.at (code);
+		return _canned.at (code);
 	}
 	catch(...)
 	{}
 
-	return _static_responses.at (500);
+	return _canned.at (500);
 }
 
-const std::unordered_map<int, std::string> HttpEndpointBase::_static_responses =
+const std::unordered_map<int, std::string> HttpBase::_canned =
 {
 	{400, "HTTP/1.0 400 Bad Request\r\n\r\n"},
 	{401, "HTTP/1.0 401 Unauthorized\r\n\r\n"},

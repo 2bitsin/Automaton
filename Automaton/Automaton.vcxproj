@@ -142,7 +142,7 @@
     <ClCompile Include="clock.cpp" />
     <ClCompile Include="dgram.cpp" />
     <ClCompile Include="Fake_WiringPi.cpp" />
-    <ClCompile Include="httpendpoint.cpp" />
+    <ClCompile Include="httpservice.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stream.cpp" />
     <ClCompile Include="utils.cpp" />
@@ -152,7 +152,7 @@
     <ClInclude Include="address.hpp" />
     <ClInclude Include="clock.hpp" />
     <ClInclude Include="Fake_WiringPi.h" />
-    <ClInclude Include="httpendpoint.hpp" />
+    <ClInclude Include="httpservice.hpp" />
     <ClInclude Include="sockstream.hpp" />
     <ClInclude Include="pollthread.hpp" />
     <ClInclude Include="sheduler.hpp" />
